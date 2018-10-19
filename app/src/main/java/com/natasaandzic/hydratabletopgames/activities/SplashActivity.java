@@ -1,8 +1,10 @@
-package com.natasaandzic.hydratabletopgames;
+package com.natasaandzic.hydratabletopgames.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.natasaandzic.hydratabletopgames.R;
 
 public class SplashActivity extends AppCompatActivity {
 
