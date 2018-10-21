@@ -27,4 +27,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile 'com.android.support:design:27.1.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.facebook.fresco:drawee:0.5.0+'
+    compile 'com.facebook.fresco:imagepipeline-okhttp:0.5.0+'
 }

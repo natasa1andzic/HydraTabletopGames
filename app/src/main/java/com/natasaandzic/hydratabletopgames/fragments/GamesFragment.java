@@ -21,8 +21,8 @@ import com.natasaandzic.hydratabletopgames.R;
  */
 public class GamesFragment extends ListFragment {
 
-	public String[] values = new String[] { "Android", "iPhone", "WebOS", "Ubuntu", "Windows7", "Max OS X",};
-	ListView lv;
+	String games[] = { "prva", "druga", "treca"};
+
 
 	public GamesFragment(){
 
@@ -37,7 +37,7 @@ public class GamesFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.Planets, android.R.layout.simple_list_item_1);
+		ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.single_item_list, R.id.firstLine, games);
 		setListAdapter(adapter);
 	}
 
