@@ -9,4 +9,11 @@ public class Keys {
 	public static final String KEY_EVENTDAY = "Dan";
 	public static final String KEY_EVENTDESCRIPTION = "Opis";
 
+	public static final String KEY_GAMES = "Sheet1";
+	public static final String KEY_GAMENAME = "Naziv";
+	public static final String KEY_GAMEPRICE = "Cena";
+	public static final String KEY_GAMEDESCRIPTION = "Opis";
+	public static final String KEY_GAMEGENRE = "Zanr";
+
+
 }

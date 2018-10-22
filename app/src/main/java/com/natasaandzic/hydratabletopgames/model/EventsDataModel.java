@@ -1,6 +1,6 @@
 package com.natasaandzic.hydratabletopgames.model;
 
-public class MyDataModel {
+public class EventsDataModel {
 
 	private String eventName;
 	private String eventDate;

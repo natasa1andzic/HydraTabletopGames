@@ -8,20 +8,19 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.natasaandzic.hydratabletopgames.R;
-import com.natasaandzic.hydratabletopgames.model.MyDataModel;
+import com.natasaandzic.hydratabletopgames.model.EventsDataModel;
 
 import java.util.List;
 
-public class MyArrayAdapter extends ArrayAdapter<MyDataModel>{
+public class EventsArrayAdapter extends ArrayAdapter<EventsDataModel>{
 
-	List<MyDataModel> modelList;
+	List<EventsDataModel> modelList;
 	Context context;
 	private LayoutInflater mInflater;
 
 	// Constructors
-	public MyArrayAdapter(Context context, List<MyDataModel> objects) {
+	public EventsArrayAdapter(Context context, List<EventsDataModel> objects) {
 		super(context, 0, objects);
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
@@ -29,7 +28,7 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel>{
 	}
 
 	@Override
-	public MyDataModel getItem(int position) {
+	public EventsDataModel getItem(int position) {
 
 		return modelList.get(position);
 	}
@@ -38,14 +37,14 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel>{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder vh;
 		if (convertView == null) {
-			View view = mInflater.inflate(R.layout.layout_row_view, parent, false);
+			View view = mInflater.inflate(R.layout.layout_row_view_events, parent, false);
 			vh = ViewHolder.create((RelativeLayout) view);
 			view.setTag(vh);
 		} else {
 			vh = (ViewHolder) convertView.getTag();
 		}
 
-		MyDataModel item = getItem(position);
+		EventsDataModel item = getItem(position);
 
 		vh.eventNameTv.setText(item.getEventName());
 		vh.eventDateTv.setText(item.getEventDate());

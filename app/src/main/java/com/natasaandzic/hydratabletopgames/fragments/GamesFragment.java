@@ -2,7 +2,6 @@ package com.natasaandzic.hydratabletopgames.fragments;
 
 import android.os.Bundle;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -10,9 +9,6 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.natasaandzic.hydratabletopgames.R;
 
@@ -37,7 +33,7 @@ public class GamesFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.single_item_list, R.id.firstLine, games);
+		ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.layout_row_view_games, R.id.gameNameTv, games);
 		setListAdapter(adapter);
 	}
 

@@ -1,15 +1,13 @@
 package com.natasaandzic.hydratabletopgames.activities;
 
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +16,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.natasaandzic.hydratabletopgames.R;
-import com.natasaandzic.hydratabletopgames.adapters.EventsArrayAdapter;
+import com.natasaandzic.hydratabletopgames.adapters.GamesArrayAdapter;
+import com.natasaandzic.hydratabletopgames.model.GamesDataModel;
 import com.natasaandzic.hydratabletopgames.model.InternetConnection;
 import com.natasaandzic.hydratabletopgames.model.Keys;
-import com.natasaandzic.hydratabletopgames.model.EventsDataModel;
 import com.natasaandzic.hydratabletopgames.parser.JSONParser;
 
 import org.json.JSONArray;
@@ -30,23 +28,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CalendarActivity extends AppCompatActivity {
+public class GamesActivity extends AppCompatActivity {
 
 	private ListView listView;
-	private ArrayList<EventsDataModel> list;
-	private EventsArrayAdapter adapter;
+	private ArrayList<GamesDataModel> list;
+	private GamesArrayAdapter adapter;
 	private Toast toastMsg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_calendar);
+		setContentView(R.layout.activity_games);
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		list = new ArrayList<>();
-		adapter = new EventsArrayAdapter(this, list);
+		adapter = new GamesArrayAdapter(this, list);
 		listView = (ListView) findViewById(R.id.listView);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +60,6 @@ public class CalendarActivity extends AppCompatActivity {
 			toastMsg.makeText(getApplicationContext(), "Internet connection is not available", Toast.LENGTH_LONG).show();
 	}
 
-
 	class GetDataTask extends AsyncTask<Void, Void, Void> {
 
 		ProgressDialog dialog;
@@ -73,7 +70,7 @@ public class CalendarActivity extends AppCompatActivity {
 			super.onPreExecute();
 			jIndex=list.size();
 
-			dialog = new ProgressDialog(CalendarActivity.this);
+			dialog = new ProgressDialog(GamesActivity.this);
 			dialog.setTitle("Reading from database...");
 			dialog.setMessage("Go make some coffee ^_^");
 			dialog.show();
@@ -82,28 +79,26 @@ public class CalendarActivity extends AppCompatActivity {
 		@Nullable
 		@Override
 		protected Void doInBackground(Void... params) {
-			JSONObject jsonObject = JSONParser.getEventsDataFromWeb();
+			JSONObject jsonObject = JSONParser.getGamesDataFromWeb();
 			try {
 				if (jsonObject != null) {
 					if(jsonObject.length() > 0) {
-						JSONArray array = jsonObject.getJSONArray(Keys.KEY_EVENTS);
+						JSONArray array = jsonObject.getJSONArray(Keys.KEY_GAMES);
 						int lenArray = array.length();
 						if(lenArray > 0) {
 							for( ; jIndex < lenArray; jIndex++) {
 
-								EventsDataModel model = new EventsDataModel();
+								GamesDataModel model = new GamesDataModel();
 								JSONObject innerObject = array.getJSONObject(jIndex);
-								String eventName = innerObject.getString(Keys.KEY_EVENTNAME);
-								String eventDate = innerObject.getString(Keys.KEY_EVENTDATE);
-								String eventTime = innerObject.getString(Keys.KEY_EVENTTIME);
-								String eventDay = innerObject.getString(Keys.KEY_EVENTDAY);
-								String eventDescription = innerObject.getString(Keys.KEY_EVENTDESCRIPTION);
+								String gameName = innerObject.getString(Keys.KEY_GAMENAME);
+								String gamePrice = innerObject.getString(Keys.KEY_GAMEPRICE);
+								String gameDescription = innerObject.getString(Keys.KEY_GAMEDESCRIPTION);
+								String gameGenre = innerObject.getString(Keys.KEY_GAMEGENRE);
 
-								model.setEventName(eventName);
-								model.setEventDate(eventDate);
-								model.setEventTime(eventTime);
-								model.setEventDay(eventDay);
-								model.setEventDescription(eventDescription);
+								model.setGameName(gameName);
+								model.setGamePrice(gamePrice);
+								model.setGameDescription(gameDescription);
+								model.setGameGenre(gameGenre);
 
 								list.add(model);
 							}
@@ -121,6 +116,7 @@ public class CalendarActivity extends AppCompatActivity {
 			super.onPostExecute(aVoid);
 			dialog.dismiss();
 			if(list.size() > 0) {
+				Log.i("List size", Integer.toString(list.size()));
 				adapter.notifyDataSetChanged();
 			} else {
 				Snackbar.make(findViewById(R.id.parentLayout), "No Data Found", Snackbar.LENGTH_LONG).show();
@@ -130,15 +126,9 @@ public class CalendarActivity extends AppCompatActivity {
 
 	private void makeDialog(int position) {
 
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CalendarActivity.this);
-		alertDialogBuilder.setTitle(list.get(position).getEventName());
-		alertDialogBuilder.setMessage(list.get(position).getEventDescription());
-
-		alertDialogBuilder.setPositiveButton("Notify me!", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				//Upisi korisnika u Firebase Cloud Messaging bazu
-			}});
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GamesActivity.this);
+		alertDialogBuilder.setTitle(list.get(position).getGameName());
+		alertDialogBuilder.setMessage(list.get(position).getGameDescription());
 
 		alertDialogBuilder.setNegativeButton("Go back", new DialogInterface.OnClickListener() {
 			@Override

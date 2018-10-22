@@ -13,7 +13,6 @@
         android:roundIcon="@drawable/hydra"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -24,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.CalendarActivity"/>
+        <activity android:name=".activities.CalendarActivity" />
+        <activity android:name=".activities.GamesActivity"></activity>
     </application>
 
 </manifest>
