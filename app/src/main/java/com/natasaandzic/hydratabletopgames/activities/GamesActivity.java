@@ -8,15 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+
 import android.widget.Toast;
 
 import com.natasaandzic.hydratabletopgames.R;
-import com.natasaandzic.hydratabletopgames.adapters.GamesArrayAdapter;
+import com.natasaandzic.hydratabletopgames.adapters.GamesAdapter;
 import com.natasaandzic.hydratabletopgames.model.GamesDataModel;
 import com.natasaandzic.hydratabletopgames.model.InternetConnection;
 import com.natasaandzic.hydratabletopgames.model.Keys;
@@ -30,28 +31,38 @@ import java.util.ArrayList;
 
 public class GamesActivity extends AppCompatActivity {
 
-	private ListView listView;
+	private RecyclerView recyclerView;
 	private ArrayList<GamesDataModel> list;
-	private GamesArrayAdapter adapter;
+	private GamesAdapter adapter;
 	private Toast toastMsg;
+
+	private LinearLayoutManager lm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_games);
 
+		recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+		recyclerView.setHasFixedSize(true);
+		lm = new LinearLayoutManager(this);
+		recyclerView.setLayoutManager(lm);
+
+		DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), lm.getOrientation());
+		recyclerView.addItemDecoration(mDividerItemDecoration);
+
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
 		list = new ArrayList<>();
-		adapter = new GamesArrayAdapter(this, list);
-		listView = (ListView) findViewById(R.id.listView);
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		adapter = new GamesAdapter(list);
+
+		recyclerView.setAdapter(adapter);
+		/*recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				makeDialog(position);
 			}
-		});
+		});*/
 
 
 		if (InternetConnection.checkConnection(getApplicationContext()))
@@ -72,7 +83,7 @@ public class GamesActivity extends AppCompatActivity {
 
 			dialog = new ProgressDialog(GamesActivity.this);
 			dialog.setTitle("Reading from database...");
-			dialog.setMessage("Go make some coffee ^_^");
+			dialog.setMessage("Gamessss ^_^");
 			dialog.show();
 		}
 

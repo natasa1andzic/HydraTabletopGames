@@ -24,8 +24,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ListView  app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/listView"
+    <android.support.v7.widget.RecyclerView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"
         android:layout_width="fill_parent"
         android:layout_height="match_parent" />
 
