@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.natasaandzic.hydratabletopgames.R;
+import com.natasaandzic.hydratabletopgames.firebase.FirebaseActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

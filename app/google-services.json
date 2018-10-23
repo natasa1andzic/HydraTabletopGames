@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1030643312906",
+    "firebase_url": "https://hydratabletopgames.firebaseio.com",
+    "project_id": "hydratabletopgames",
+    "storage_bucket": "hydratabletopgames.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030643312906:android:fe56a8b0c1a7ae96",
+        "android_client_info": {
+          "package_name": "com.natasaandzic.hydratabletopgames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030643312906-dql9u5j57c9jea2qt31escph99404cse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcHZYHU3UmgupUeeZh1PRWbcZB9qy4M88"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
