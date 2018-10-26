@@ -30,12 +30,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ *CalendarActivity uses ListView for viewing events from the Events spreadsheet.
+ */
+
 public class CalendarActivity extends AppCompatActivity {
 
 	private ListView listView;
 	private ArrayList<EventsDataModel> list;
 	private EventsArrayAdapter adapter;
 	private Toast toastMsg;
+
+	private static final String EVENTS_URL = "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=16PtWcg_Ghha0rnLjOdO4RmoGqpu72LTKYCAsZUVT-6M&sheet=Sheet1";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +51,28 @@ public class CalendarActivity extends AppCompatActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
+		/**
+		 * Using a custom array adapter for inflating our listview with data from EventsDataModel
+		 */
+
 		list = new ArrayList<>();
 		adapter = new EventsArrayAdapter(this, list);
 		listView = (ListView) findViewById(R.id.listView);
 		listView.setAdapter(adapter);
+
+		/**
+		 * Clicking on each item in the list opens an AlertDialog with event name and
+		 * event description.
+		 */
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				makeDialog(position);
 			}
 		});
 
+		/**
+		 * Checking if device is connected to the internet.
+		 */
 
 		if (InternetConnection.checkConnection(getApplicationContext()))
 			new GetDataTask().execute();
@@ -63,6 +81,11 @@ public class CalendarActivity extends AppCompatActivity {
 	}
 
 
+	/**
+	 * Getting JSON data from the internet,
+	 * converting it to strings,
+	 * filling our textviews with those strings.
+	 */
 	class GetDataTask extends AsyncTask<Void, Void, Void> {
 
 		ProgressDialog dialog;
@@ -82,7 +105,7 @@ public class CalendarActivity extends AppCompatActivity {
 		@Nullable
 		@Override
 		protected Void doInBackground(Void... params) {
-			JSONObject jsonObject = JSONParser.getEventsDataFromWeb();
+			JSONObject jsonObject = JSONParser.getDataFromWeb(EVENTS_URL);
 			try {
 				if (jsonObject != null) {
 					if(jsonObject.length() > 0) {
@@ -111,7 +134,7 @@ public class CalendarActivity extends AppCompatActivity {
 					}
 				}
 			} catch (JSONException je) {
-				Log.i(JSONParser.TAG, "" + je.getLocalizedMessage());
+				Log.i("Events url", "" + je.getLocalizedMessage());
 			}
 			return null;
 		}

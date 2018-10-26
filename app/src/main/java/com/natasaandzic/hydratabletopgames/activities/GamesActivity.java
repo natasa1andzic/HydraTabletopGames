@@ -29,25 +29,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * GamesActivity uses RecyclerView for viewing data from the spreadsheet
+ */
+
 public class GamesActivity extends AppCompatActivity {
 
-	private RecyclerView recyclerView;
 	private ArrayList<GamesDataModel> list;
 	private GamesAdapter adapter;
 	private Toast toastMsg;
 
+	/**
+	 * RecyclerView variables
+	 */
+	private RecyclerView recyclerView;
 	private LinearLayoutManager lm;
+	private static final String GAMES_URL =  "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1hJBfdExFLbJcbM1FT846GEeO6zNAuyvBKStB-9OcQEY&sheet=Sheet1";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_games);
 
+		/**
+		 * RecyclerView stuff
+		 */
 		recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 		recyclerView.setHasFixedSize(true);
 		lm = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(lm);
-
 		DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), lm.getOrientation());
 		recyclerView.addItemDecoration(mDividerItemDecoration);
 
@@ -65,12 +75,20 @@ public class GamesActivity extends AppCompatActivity {
 		});*/
 
 
+		/**
+		 *Checking for internet connection
+		 */
 		if (InternetConnection.checkConnection(getApplicationContext()))
 			new GetDataTask().execute();
 		else
 			toastMsg.makeText(getApplicationContext(), "Internet connection is not available", Toast.LENGTH_LONG).show();
 	}
 
+	/**
+	 * Getting JSON data from the internet,
+	 * converting it to strings,
+	 * filling our textviews with those strings.
+	 */
 	class GetDataTask extends AsyncTask<Void, Void, Void> {
 
 		ProgressDialog dialog;
@@ -90,7 +108,7 @@ public class GamesActivity extends AppCompatActivity {
 		@Nullable
 		@Override
 		protected Void doInBackground(Void... params) {
-			JSONObject jsonObject = JSONParser.getGamesDataFromWeb();
+			JSONObject jsonObject = JSONParser.getDataFromWeb(GAMES_URL);
 			try {
 				if (jsonObject != null) {
 					if(jsonObject.length() > 0) {
@@ -117,7 +135,7 @@ public class GamesActivity extends AppCompatActivity {
 					}
 				}
 			} catch (JSONException je) {
-				Log.i(JSONParser.TAG, "" + je.getLocalizedMessage());
+				Log.i("Games url", "" + je.getLocalizedMessage());
 			}
 			return null;
 		}

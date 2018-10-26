@@ -14,6 +14,12 @@ import com.natasaandzic.hydratabletopgames.R;
 import com.natasaandzic.hydratabletopgames.adapters.MyFragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
+	/**
+	 * Za rad sa fragmentima, potreban nam je TabLayout, ViewPager i FragmentPagerAdapter
+	 */
+	private TabLayout tabLayout;
+	private ViewPager viewPager;
+	private MyFragmentPagerAdapter adapter;
 
 	private Button eventsBtn;
 	private Button gamesBtn;
@@ -48,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 		//Ako koristimo fragmente
-		/*TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+		/*tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 		tabLayout.addTab(tabLayout.newTab().setText("Calendar"));
 		tabLayout.addTab(tabLayout.newTab().setText("Games"));
 		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-		MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 		viewPager.setAdapter(adapter);
 
 		tabLayout.setupWithViewPager(viewPager); // this will automatically bind tab clicks to viewpager fragments

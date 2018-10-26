@@ -17,6 +17,9 @@ import com.natasaandzic.hydratabletopgames.model.GamesDataModel;
 
 import java.util.ArrayList;
 
+/**
+ * Pravimo adapter za RecyclerView. NE RADI JOS UVEK? radi?
+ */
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder> {
 
 	private ArrayList<GamesDataModel> modelList;

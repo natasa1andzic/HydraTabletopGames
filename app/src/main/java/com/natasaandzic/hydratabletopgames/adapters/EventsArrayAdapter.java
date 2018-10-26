@@ -13,6 +13,16 @@ import com.natasaandzic.hydratabletopgames.model.EventsDataModel;
 
 import java.util.List;
 
+/**
+ *
+ * - EventsArrayAdapter koristimo za punjenje liste objekata.
+ * - ArrayAdapter funkcionise tako sto konstruktoru prosledimo context i listu objekata.
+ * - Moramo da override-ujemo metodu getItem(position).
+ * - Pravimo staticku unutrasnju klasu ViewHolder sa metodom ViewHolder create(layout),
+ *   koja vraca sta nam sve ide u view kao (layout, textviews).
+ * - Metoda getView uzima View, inflate-uje ga sa nasim layout_row_view i puni podacima iz ViewHolder-a.
+ *
+ */
 public class EventsArrayAdapter extends ArrayAdapter<EventsDataModel>{
 
 	List<EventsDataModel> modelList;

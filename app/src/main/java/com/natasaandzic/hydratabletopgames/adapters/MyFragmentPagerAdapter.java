@@ -7,6 +7,11 @@ import android.support.v4.app.FragmentManager;
 import com.natasaandzic.hydratabletopgames.fragments.CalendarFragment;
 import com.natasaandzic.hydratabletopgames.fragments.GamesFragment;
 
+/**
+ * FragmentPagerAdapter koristimo za fragmente, da prikazemo listu naziva fragmenata,
+ * Moramo da override-ujemo metode getPageTitle, getItem i getCount.
+ * U konstruktoru prosledjujemo FragmentManager i numOfTabs.
+ */
 public class MyFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
 
 	private String[] tabTitles = new String[]{"Calendar", "Games"};
