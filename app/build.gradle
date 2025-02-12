@@ -9,6 +9,7 @@ android {
         minSdkVersion 22
         targetSdkVersion 27
         versionCode 1
+        namespace "com.natasaandzic.hydratabletopgames"
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -22,9 +23,9 @@ android {
 
 dependencies {
 
-    compile 'com.google.android.gms:play-services:10.2.1'
-    compile 'com.google.firebase:firebase-messaging:10.2.1'
-    compile 'com.google.firebase:firebase-core'
+    implementation 'com.google.android.gms:play-services:10.2.1'
+    implementation 'com.google.firebase:firebase-messaging:10.2.1'
+    implementation 'com.google.firebase:firebase-core'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -35,11 +36,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    api 'com.android.support:design:27.1.1'
-    api 'com.squareup.okhttp:okhttp:2.4.0'
-    api 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
-    api 'com.facebook.fresco:drawee:0.5.0+'
-    api 'com.facebook.fresco:imagepipeline-okhttp:0.5.0+'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.squareup.okhttp:okhttp:2.4.0'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    implementation 'com.facebook.fresco:drawee:0.5.0+'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp:0.5.0+'
 
     implementation 'com.android.support:recyclerview-v7:27.0.0'
 
